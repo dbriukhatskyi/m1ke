@@ -4,10 +4,10 @@
 package threemonthjunior.morandblack.m1ke;
 
 /**
- * @author Dmytro Briukhatskyi
+ * @author 
  *
  */
-class RemoveBranchCommand implements Command {
+class RemoveBranchCommand extends AbstractCommand implements Command {
 
     /* (non-Javadoc)
      * @see threemonthjunior.morandblack.m1ke.Command#execute()
@@ -25,12 +25,6 @@ class RemoveBranchCommand implements Command {
     public void configure(String[] parameter) {
         // TODO Auto-generated method stub
         
-    }
-
-    @Override
-    public boolean allowsToProceed() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 }

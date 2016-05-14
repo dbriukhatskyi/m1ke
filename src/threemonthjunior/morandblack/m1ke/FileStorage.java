@@ -18,6 +18,8 @@ import java.io.InputStream;
  * 
  * @see threemonthjunior.morandblack.m1ke.FileIdentifier
  * 
+ * @author Dmytro Briukhatskyi
+ * 
  */
 interface FileStorage {
     

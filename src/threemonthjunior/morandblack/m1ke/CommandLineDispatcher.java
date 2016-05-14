@@ -6,7 +6,7 @@ package threemonthjunior.morandblack.m1ke;
 import java.util.HashMap;
 
 /**
- * @author Dmytro Briukhatsky
+ * @author Dmytro Briukhatskyi
  *
  */
 final class CommandLineDispatcher {
@@ -38,26 +38,6 @@ final class CommandLineDispatcher {
      */
     public static Command getCommand(String[] args) {
         // TODO implement selection of an appropriate action
-        return new Command() {
-
-            @Override
-            public void execute(ApplicationState appState) {
-                // simple stub
-                
-            }
-
-            @Override
-            public void configure(String[] parameter) {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public boolean allowsToProceed() {
-                // TODO Auto-generated method stub
-                return false;
-            }
-            
-        };
+        return cmdMap.get(null);
     }
 }

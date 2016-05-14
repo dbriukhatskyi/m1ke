@@ -19,6 +19,8 @@ import java.nio.file.Path;
 class ApplicationState {
     private Path workingDirectory;
     private Repository currentRepo;
+    private boolean quitRequest;
+    private boolean initialized;
     
     /**
      * @return the workingDirectory
@@ -47,5 +49,38 @@ class ApplicationState {
     public void setCurrentRepo(Repository currentRepo) {
         this.currentRepo = currentRepo;
     }
-
+    
+    /**
+     * Mark the state as no longer needed by further application launches.
+     */
+    public void requestQuit() {
+        quitRequest = true;
+    }
+    
+    /**
+     * Tells if the state was marked as no longer needed 
+     * by further application launches.
+     * 
+     * @return true if the state is no longer needed
+     */
+    public boolean quitRequested() {
+        return quitRequest;
+    }
+    
+    /**
+     * Mark the state as valid for further use.
+     */
+    public void initialize() {
+        initialized = true;
+    }
+    
+    /**
+     * Check if the state is valid for further use.
+     * 
+     * @return true if the state is valid
+     */
+    public boolean isInitialized() {
+        return initialized;
+    }
+    
 }

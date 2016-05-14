@@ -4,27 +4,44 @@
 package threemonthjunior.morandblack.m1ke;
 
 /**
- * @author Dmytro Briukhatsky
+ * @author Dmytro Briukhatskyi
  *
  */
 public class Application {
+    
+    private static ApplicationState appState;
+    
+    private static void loadAppState() {
+        // TODO dummy implementation
+        appState = new ApplicationState();
+    }
+    
+    private static void saveAppState() {
+        // TODO dummy implementation
+        
+        if (appState.isInitialized()) {
+            // write current state to disk
+        }
+        
+        if (appState.quitRequested()) {
+            // remove the file with the request
+        }
+    }
 
     /**
      * Entry-point method.
      * 
-     * @param args
+     * @param args 
+     *        command-line parameters
      */
     public static void main(String[] args) {
-        ApplicationState appState = new ApplicationState();
+        loadAppState();
         
         Command command = CommandLineDispatcher.getCommand(args);
         
-        while (command.allowsToProceed()) {
-            command.execute(appState);
-            
-            String[] nextInput = CLI.getInput();
-            command = CommandLineDispatcher.getCommand(nextInput);
-        }
+        command.execute(appState);
+        
+        saveAppState();
     }
 
 }
