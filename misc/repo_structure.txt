@@ -1,0 +1,54 @@
+\working_dir
+|
++--\.m1ke
+|  |
+|  +--\file_storage
+|  |  |
+|  |  +--\[md5sum]
+|  |     |
+|  |     +--0.gzip
+|  |     |
+|  |     +--1.gzip etc. (extremely unlikely to happen)
+|  |
+|  +--\commits
+|  |  |
+|  |  +--[commit_id].dat
+|  |  |
+|  |  +--etc.
+|  |
+|  +--\branches
+|     |
+|     +--active_branch.txt
+|     |
+|     +--[branch_name].dat
+|     |
+|     +--etc.
+|  
++--\some_directory
+|  |
+|  +---file1
+|  |
+|  +---file2
+|  |
+|  +---etc.
+|
++--\etc.
+
+
+Comments:
+=========
+
+\working_dir - directory under source control
+\some_directory, file1, file2, ... - directory structure and files under source control
+
+[md5sum] - calculated checksum of a file used as file name
+0.gzip - the very first appeared file with such checksum
+1.gzip - just in case we have different files with the same checksum
+
+active_branch.txt - file containing the name of the active branch
+[branch_name].dat - file containing the id of the latest commit
+
+[commit_id].dat - some file (probably XML/JSON/...?) containing the following data:
+			* previous commit id
+			* directory state as of time of this commit
+		  commit_id - calculated commit unique identifier (say, timestamp-based like 20160514121101456789)
