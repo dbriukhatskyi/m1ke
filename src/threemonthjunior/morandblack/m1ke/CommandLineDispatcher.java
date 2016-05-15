@@ -3,6 +3,7 @@
  */
 package threemonthjunior.morandblack.m1ke;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -12,20 +13,19 @@ import java.util.HashMap;
 final class CommandLineDispatcher {
     
     /** Map linking a command line parameter name to a Command instance */
-    private static HashMap<String, Command> cmdMap = new HashMap<>();
-    
-    static {
-        cmdMap.put("init", new InitCommand());
-        cmdMap.put("integrate", new IntegrateCommand());
-        cmdMap.put("save", new SaveCommand());
-        cmdMap.put("quit", new QuitCommand());
-        cmdMap.put("create-branch", new CreateBranchCommand());
-        cmdMap.put("get-branch", new GetBranchCommand());
-        cmdMap.put("remove-branch", new RemoveBranchCommand());
-        cmdMap.put(null, new PrintUsageCommand());
-    }
+    private static HashMap<String, Command> cmdMap = 
+            new HashMap<String, Command>() { {
+                put("init", new InitCommand());
+                put("integrate", new IntegrateCommand());
+                put("save", new SaveCommand());
+                put("quit", new QuitCommand());
+                put("create-branch", new CreateBranchCommand());
+                put("get-branch", new GetBranchCommand());
+                put("remove-branch", new RemoveBranchCommand());
+                put(null, new PrintUsageCommand());
+            } };
 
-    /** Noninstantiable */
+    /** Non-instantiable */
     private CommandLineDispatcher() {}
     
     /**
@@ -37,7 +37,23 @@ final class CommandLineDispatcher {
      * @return Command class instance, ready to use
      */
     public static Command getCommand(String[] args) {
-        // TODO implement selection of an appropriate action
-        return cmdMap.get(null);
+        String cmdName = null;
+        String[] parameters = null;  
+        
+        if (args.length > 0) {
+            cmdName = args[0];
+            
+            if (args.length > 1) 
+                parameters = Arrays.copyOfRange(args, 1, args.length);
+        }
+        
+        Command cmd = cmdMap.get(cmdName);
+        
+        if (cmd == null)
+            cmd = cmdMap.get(null);
+        
+        cmd.configure(parameters);
+        
+        return cmd;
     }
 }

@@ -15,3 +15,9 @@ hs_err_pid*
 
 # Binaries folder
 /bin/
+
+# Temp folder for unit tests
+/temp/
+
+# AppState file
+*.state

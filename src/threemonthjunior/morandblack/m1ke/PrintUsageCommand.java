@@ -4,7 +4,9 @@
 package threemonthjunior.morandblack.m1ke;
 
 /**
- * @author 
+ * A command to print program usage to console.
+ * 
+ * @author Dmytro Briukhatskyi
  *
  */
 class PrintUsageCommand extends AbstractCommand implements Command {
@@ -14,8 +16,7 @@ class PrintUsageCommand extends AbstractCommand implements Command {
      */
     @Override
     public void execute(ApplicationState appState) {
-        // TODO Auto-generated method stub
-
+        Console.print(Settings.USAGE_MESSAGE);
     }
 
 }

@@ -4,7 +4,9 @@
 package threemonthjunior.morandblack.m1ke;
 
 /**
- * @author 
+ * A command to change current branch to a specified one.
+ * 
+ * @author Dmytro Briukhatskyi
  *
  */
 class GetBranchCommand extends AbstractCommand implements Command {
@@ -14,17 +16,20 @@ class GetBranchCommand extends AbstractCommand implements Command {
      */
     @Override
     public void execute(ApplicationState appState) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /* (non-Javadoc)
-     * @see threemonthjunior.morandblack.m1ke.Command#configure(java.lang.String)
-     */
-    @Override
-    public void configure(String[] parameter) {
-        // TODO Auto-generated method stub
+        if (!validateStateAndRepo(appState))
+            return;
         
+        if (parametersEmpty()) {
+            Console.print("Please supply branch name!");
+            return;
+        }
+        
+        String branchName = parameters[0];
+        
+        appState.getCurrentRepo().setActiveBranch(branchName);
+        
+        if (Settings.DEBUG_MODE)
+            Console.print("get branch '" + branchName + "': SUCCESS");
     }
 
 }

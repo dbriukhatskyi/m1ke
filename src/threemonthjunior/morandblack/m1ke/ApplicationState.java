@@ -23,17 +23,23 @@ class ApplicationState {
     private boolean initialized;
     
     /**
-     * @return the workingDirectory
+     * @return the working directory
      */
     public Path getWorkingDirectory() {
         return workingDirectory;
     }
     
     /**
-     * @param workingDirectory the workingDirectory to set
+     * Sets working directory to the specified one and gets repository for 
+     * that directory. If no repository found, the new one is created. 
+     * 
+     * @param workingDirectory 
+     *        the working directory to set
      */
     public void setWorkingDirectory(Path workingDirectory) {
         this.workingDirectory = workingDirectory;
+        
+        this.currentRepo = Repository.forDirectory(workingDirectory);
     }
     
     /**
@@ -41,13 +47,6 @@ class ApplicationState {
      */
     public Repository getCurrentRepo() {
         return currentRepo;
-    }
-    
-    /**
-     * @param currentRepo the currentRepo to set
-     */
-    public void setCurrentRepo(Repository currentRepo) {
-        this.currentRepo = currentRepo;
     }
     
     /**

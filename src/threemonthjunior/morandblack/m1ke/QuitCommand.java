@@ -17,6 +17,9 @@ class QuitCommand extends AbstractCommand implements Command {
     @Override
     public void execute(ApplicationState appState) {
         appState.requestQuit();
+        
+        if (Settings.DEBUG_MODE)
+            Console.print("quit: SUCCESS");
     }
 
 }

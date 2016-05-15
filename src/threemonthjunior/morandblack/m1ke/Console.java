@@ -40,6 +40,16 @@ final class Console {
     }
     
     /**
+     * Prints provided object's string representation to the console.
+     * 
+     * @param arg
+     *        object to print
+     */
+    public static void print(Object arg) {
+        System.out.println(arg);
+    }
+    
+    /**
      * Gets a confirmation to an action from the user.
      * 
      * @param message
