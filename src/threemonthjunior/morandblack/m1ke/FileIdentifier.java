@@ -4,29 +4,33 @@
 package threemonthjunior.morandblack.m1ke;
 
 /**
+ * A structure to store the file's unique identifier within a storage.
+ * Identifier consists of the string representation of checksum and
+ * the ordinal number of the unique file with such checksum.
+ * 
  * @author Dmytro Briukhatskyi
  *
  */
 class FileIdentifier {
     
     /** File checksum */
-    private String checksum;
+    private String hash;
     
-    /** File position within that checksum */
+    /** File position within that hash */
     private long position;
 
     /**
      * @return the checksum
      */
-    public String getChecksum() {
-        return checksum;
+    public String getHash() {
+        return hash;
     }
 
     /**
-     * @param checksum the checksum to set
+     * @param hash the hash to set
      */
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     /**

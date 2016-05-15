@@ -33,7 +33,7 @@ class Repository {
      * Creates a new instance. Cannot be called from the client code.
      * 
      * @throws IOException 
-     * 
+     *         when specified directory could not be created 
      */
     private Repository(Path basePath) throws IOException {
         workingPath = basePath;
@@ -44,6 +44,15 @@ class Repository {
         Files.createDirectory(workingPath);
     }
     
+    /**
+     * Reads directory state from the commit.
+     * 
+     * @param commitId
+     *        commit ID to get directory state from
+     * 
+     * @return {@link DirectoryState} object containing directory state 
+     *         for the specified commit 
+     */
     private DirectoryState getDirStateForCommit(String commitId) {
         // TODO implement
         
@@ -51,7 +60,6 @@ class Repository {
     }
     
     /**
-     * 
      * @return active branch name
      */
     public String getActiveBranch() {
@@ -59,7 +67,6 @@ class Repository {
     }
     
     /**
-     * 
      * @param branchName
      *        the name of a branch to set as active
      */
@@ -76,6 +83,7 @@ class Repository {
     }
     
     /**
+     * Creates a new branch.
      * 
      * @param branchName
      *        the name of a new branch to create
@@ -93,6 +101,7 @@ class Repository {
     }
     
     /**
+     * Removes an existing branch. 
      * 
      * @param branchName
      */
@@ -100,6 +109,8 @@ class Repository {
         // TODO check if a branch exists and remove it from disk
         
         // TODO process a situation with deletion of an active branch
+        
+        // TODO maybe add an exception for this
     }
     
     /**
@@ -122,14 +133,23 @@ class Repository {
         return null;
     }
     
+    /**
+     * Commit current changes.
+     * 
+     * @param message
+     *        commit message
+     * 
+     * @see DirectoryState
+     * @see FileUtils#getFilesToStore(DirectoryState, DirectoryState)
+     * @see FileStorage#storeFileAndGetID(java.io.InputStream)
+     * @see java.time.LocalDateTime#now()
+     */
     public void Commit(String message) {
-        // TODO generate commit ID
-        // TODO read latest commit ID
+        // TODO generate commit ID of current time with milliseconds
+        // TODO read latest commit ID from headPointer
+        // TODO create a DirectoryState to write to disk
         
-        // TODO create a FileSystemState to write to disk
-        
-        // TODO write the newly created FileSystemState
+        // TODO write the newly created DirectoryState
     }
-
     
 }

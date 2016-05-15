@@ -4,7 +4,7 @@
 |  |
 |  +--\file_storage
 |  |  |
-|  |  +--\[md5sum]
+|  |  +--\[hash]
 |  |     |
 |  |     +--0.gzip
 |  |     |
@@ -41,7 +41,7 @@ Comments:
 \working_dir - directory under source control
 \some_directory, file1, file2, ... - directory structure and files under source control
 
-[md5sum] - calculated checksum of a file used as file name
+[hash] - calculated hash of a file used as file name
 0.gzip - the very first appeared file with such checksum
 1.gzip - just in case we have different files with the same checksum
 
