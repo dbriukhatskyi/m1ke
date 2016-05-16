@@ -19,6 +19,8 @@ abstract class AbstractCommand implements Command {
      */
     @Override
     public void configure(String[] parameters) {
+        this.parameters = null;
+        
         if (parameters != null) {
             this.parameters = new String[parameters.length];
             System.arraycopy(parameters, 0, this.parameters, 0, parameters.length);

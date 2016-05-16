@@ -3,6 +3,7 @@
  */
 package threemonthjunior.morandblack.m1ke;
 
+
 /**
  * A command to save current working directory snapshot into commit.
  * 
@@ -24,8 +25,8 @@ class SaveCommand extends AbstractCommand implements Command {
         if (parametersEmpty()) {
             commitMessage = getNewCommitMessage();
         } else {
-            if (parameters.length > 2 && parameters[1].equals("-m"))
-                commitMessage = parameters[2];
+            if (parameters.length > 1 && parameters[0].equals("-m"))
+                commitMessage = parameters[1];
             
             if (commitMessage.trim().isEmpty())
                 commitMessage = getNewCommitMessage();

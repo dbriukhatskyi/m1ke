@@ -24,16 +24,16 @@ class RemoveBranchCommand extends AbstractCommand implements Command {
         
         String branchName = parameters[0];
         
-        if (appState.getCurrentRepo().getActiveBranch().equals(branchName)) {
+        if (branchName.equals(appState.getCurrentRepo().getActiveBranch())) {
             Console.print("Cannot remove active branch! "
                     + "Please, change active branch first.");
             return;
         }
         
-        appState.getCurrentRepo().createBranch(branchName);
+        appState.getCurrentRepo().removeBranch(branchName);
         
         if (Settings.DEBUG_MODE)
-            Console.print("create branch '" + branchName + "': SUCCESS");
+            Console.print("remove branch '" + branchName + "': SUCCESS");
     }
 
 }
