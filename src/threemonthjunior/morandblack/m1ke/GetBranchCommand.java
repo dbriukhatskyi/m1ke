@@ -26,7 +26,7 @@ class GetBranchCommand extends AbstractCommand implements Command {
         
         String branchName = parameters[0];
         
-        appState.getCurrentRepo().setActiveBranch(branchName);
+        appState.getCurrentRepo().setActiveBranch(branchName, true);
         
         if (Settings.DEBUG_MODE)
             Console.print("get branch '" + branchName + "': SUCCESS");
