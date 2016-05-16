@@ -12,7 +12,7 @@
 |  |
 |  +--\commits
 |  |  |
-|  |  +--[commit_id].dat
+|  |  +--[commit_id]
 |  |  |
 |  |  +--etc.
 |  |
@@ -20,7 +20,7 @@
 |     |
 |     +--active_branch.txt
 |     |
-|     +--[branch_name].dat
+|     +--[branch_name]
 |     |
 |     +--etc.
 |  
@@ -46,9 +46,9 @@ Comments:
 1.gzip - just in case we have different files with the same checksum
 
 active_branch.txt - file containing the name of the active branch
-[branch_name].dat - file containing the id of the latest commit
+[branch_name] - file containing the id of the latest commit
 
-[commit_id].dat - some file (probably XML/JSON/...?) containing the following data:
+[commit_id] - some file (probably XML/JSON/...?) containing the following data:
 			* previous commit id
 			* directory state as of time of this commit
 		  commit_id - calculated commit unique identifier (say, timestamp-based like 20160514121101456789)

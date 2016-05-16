@@ -13,7 +13,7 @@ public final class Settings {
     private Settings() {}
     
     /** Repository service subdirectory relative path */
-    public final static String REPO_SUB_PATH = ".m1ke/";
+    public final static String REPO_SUB_PATH = ".m1ke";
     
     /** Default initial branch name for creating a new repository */
     public final static String DEFAULT_BRANCH_NAME = "master"; 
@@ -26,6 +26,6 @@ public final class Settings {
     public final static String USAGE_MESSAGE = "usage: m1ke <command> [parameters]";
 
     /** Print debug messages */ 
-    public static final boolean DEBUG_MODE = true;     
+    public static final boolean DEBUG_MODE = false;     
     
 }
