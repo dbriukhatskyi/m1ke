@@ -3,8 +3,13 @@
  */
 package threemonthjunior.morandblack.m1ke;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 
 
@@ -129,5 +134,124 @@ final class FileUtils {
         // TODO implement
         return null;
     }
+    
+    /**
+     * Checks if provided directory is empty.
+     * 
+     * @param directory
+     *        a path to check
+     * 
+     * @return true if provided directory is empty
+     * 
+     * @throws IOException
+     *         if directory could not be read 
+     *         (for example, if it doesn't exist 
+     *          or if the provided path is not a directory) 
+     */
+    public static boolean dirIsEmpty(Path directory) throws IOException {
+        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(directory)) {
+            return !dirStream.iterator().hasNext();
+        }
+    }
 
+    /**
+     * Copy directory contents to another directory, 
+     * optionally excluding given path. All Path parameters should be absolute.
+     * 
+     * Borrowed from <a href = "http://stackoverflow.com/questions/6214703/copy-entire-directory-contents-to-another-directory"> source </a>
+     * 
+     * @param src
+     *        source path
+     * 
+     * @param dest
+     *        destination path
+     *        
+     * @param excluding
+     *        <em>absolute</em> path to exclude from copying
+     *        
+     * @throws IOException
+     */
+    public static void copyDirectoryContents(
+            Path src, 
+            Path dest, 
+            Path... excluding) throws IOException 
+    {
+        Path pathToExclude;
+        
+        if (excluding.length < 1)
+            pathToExclude = null;
+        else
+            pathToExclude = excluding[0];
+        
+        Files.walkFileTree(src, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult preVisitDirectory(
+                    final Path dir,
+                    final BasicFileAttributes attrs) 
+                            throws IOException 
+            {
+                if (pathToExclude == null || !dir.startsWith(pathToExclude))
+                     Files.createDirectories(dest.resolve(src.relativize(dir)));
+                
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(
+                    final Path file,
+                    final BasicFileAttributes attrs) 
+                            throws IOException 
+            {
+                if (pathToExclude == null || !file.startsWith(pathToExclude))
+                     Files.copy(file, dest.resolve(src.relativize(file)));
+
+                return FileVisitResult.CONTINUE;
+            }
+        });
+    }
+
+    /**
+     * A helper method to clean a directory contents recursively.
+     * 
+     * Borrowed from <a href = "http://www.adam-bien.com/roller/abien/entry/java_7_deleting_recursively_a">here</a>
+     * 
+     * @param directory
+     *        path to a directory to delete
+     * 
+     * @param excludeDir
+     *        path to a directory to exclude from deletion
+     * 
+     * @throws IOException
+     *         if were unable to clean the directory due to an I/O exception
+     */
+    public static void cleanDirRecursively(Path directory, String excludeDir) 
+            throws IOException 
+    {
+        if (!Files.exists(directory)) 
+            return;
+        
+        Files.walkFileTree(directory, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) 
+                    throws IOException 
+            {
+                if (!file.toString().contains(excludeDir))
+                    Files.delete(file);
+
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) 
+                    throws IOException 
+            {
+                if (!dir.equals(directory) && !dir.toString().contains(excludeDir))
+                    Files.delete(dir);
+
+                return FileVisitResult.CONTINUE;
+            }
+
+        });
+    }
+ 
 }
